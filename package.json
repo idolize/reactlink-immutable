@@ -1,0 +1,40 @@
+{
+  "name": "reactlink-immutable",
+  "version": "0.1.0",
+  "description": "Two-way binding Mixin for React with support for Immutable.js data structures",
+  "author": {
+    "name": "David Idol",
+    "url": "http://daveidol.com"
+  },
+  "homepage": "https://github.com/idolize/reactlink-immutable",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/idolize/reactlink-immutable.git"
+  },
+  "bugs": {
+    "url": "https://github.com/idolize/reactlink-immutable/issues"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test"
+  },
+  "devDependencies": {
+    "chai": "^2.3.0",
+    "immutable": "^3.7.2",
+    "mocha": "^2.2.4"
+  },
+  "keywords": [
+    "immutable",
+    "immutablejs",
+    "react",
+    "mixin",
+    "ReactLink",
+    "LinkedImmutableStateMixin",
+    "LinkedStateMixin",
+    "linkState",
+    "valueLink",
+    "deep",
+    "binding"
+  ],
+  "license": "MIT"
+}
