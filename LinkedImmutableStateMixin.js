@@ -5,13 +5,11 @@ function ReactLink(value, requestChange) {
   this.requestChange = requestChange;
 }
 
-// Per the React docs:
-// 
-// Note that state must be a plain JS object, and not an Immutable collection,
+// Per the React docs, this.state MUST be a plain JS object, and not an Immutable collection,
 // because React's setState API expects an object literal and will merge it
 // (Object.assign) with the previous state.
 // 
-// However, we can use Immutable data sructures for nested state.
+// However, we can use Immutable data sructures on the nested properties of this.state.
 // Ex: linkImmutableState(['one', 'two']) would translate to state.one.get('two')
 
 var LinkedImmutableStateMixin = {
@@ -26,17 +24,19 @@ var LinkedImmutableStateMixin = {
     }
     
     var first = key.shift();
-    var rootItem = this.state[first];
+    var firstItem = this.state[first];
     var hasImmutable = key.length > 0;
-    if (hasImmutable && typeof rootItem.getIn !== 'function') {
+    if (hasImmutable && typeof firstItem.getIn !== 'function') {
       throw new Error('Not an Immutable object: this.state.' + first);
     }
+    var valueToReturn = hasImmutable ? firstItem.getIn(key) : firstItem;
+    if (typeof valueToReturn.toJS === 'function') valueToReturn = valueToReturn.toJS();
 
     var partialState = {};
     return new ReactLink(
-      hasImmutable ? rootItem.getIn(key) : rootItem,
-      function requestChange(newValue) {
-        partialState[first] = hasImmutable ? rootItem.setIn(key, newValue) : newValue;
+      valueToReturn,
+      function requestChange(valueToSetInState) {
+        partialState[first] = hasImmutable ? firstItem.setIn(key, valueToSetInState) : valueToSetInState;
         setState(partialState);
       }
     );
