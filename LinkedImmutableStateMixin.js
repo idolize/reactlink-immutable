@@ -30,7 +30,7 @@ var LinkedImmutableStateMixin = {
       throw new Error('Not an Immutable object: this.state.' + first);
     }
     var valueToReturn = hasImmutable ? firstItem.getIn(key) : firstItem;
-    if (typeof valueToReturn.toJS === 'function') valueToReturn = valueToReturn.toJS();
+    if (valueToReturn && typeof valueToReturn.toJS === 'function') valueToReturn = valueToReturn.toJS();
 
     var partialState = {};
     return new ReactLink(

@@ -10,6 +10,7 @@ function linkAndRun(linkFunc, key, newValue) {
   // Sets up the two-way binding and then issues a change
   var result = linkFunc(key);
   result.requestChange(newValue);
+  return result;
 }
 
 describe('linkImmutableState', function() {
@@ -82,6 +83,17 @@ describe('linkImmutableState', function() {
     linkAndRun(link, ['a', 'b', 'c'], 'correct');
     expect(test.state.a.get('b')).to.not.equal(origB);
     expect(test.state.a.getIn(['b', 'c'])).to.equal('correct');
+  });
+
+  it('should update arrays correctly', function() {
+    test.state.a = new Immutable.Map({ b: new Immutable.Map({ c: new Immutable.List(['one', 'two']) }) });
+    var origB = test.state.a.get('b');
+    var newList = new Immutable.List(['correct']);
+    var res = linkAndRun(link, ['a', 'b', 'c'], newList);
+    expect(res.value).to.be.instanceof(Array);
+    expect(res.value).to.have.members(['one', 'two']);
+    expect(test.state.a.get('b')).to.not.equal(origB);
+    expect(test.state.a.getIn(['b', 'c'])).to.equal(newList);
   });
 
   it('should do nothing when Immutable doesn\'t change', function() {
