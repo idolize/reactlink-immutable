@@ -13,7 +13,7 @@ function ReactLink(value, requestChange) {
 // Ex: linkImmutableState(['one', 'two']) would translate to state.one.get('two')
 
 var LinkedImmutableStateMixin = {
-  linkImmutableState: function linkImmutableState(key) {
+  linkImmutableState: function linkImmutableState(key, keepImmutable) {
     var setState = this.setState.bind(this);
     if (!key) throw new Error('Missing key');
     if (key instanceof Array) {
@@ -30,7 +30,10 @@ var LinkedImmutableStateMixin = {
       throw new Error('Not an Immutable object: this.state.' + first);
     }
     var valueToReturn = hasImmutable ? firstItem.getIn(key) : firstItem;
-    if (valueToReturn && typeof valueToReturn.toJS === 'function') valueToReturn = valueToReturn.toJS();
+    if (valueToReturn && typeof valueToReturn.toJS === 'function' && !keepImmutable) {
+      // Convert to plain JS object
+      valueToReturn = valueToReturn.toJS();
+    }
 
     var partialState = {};
     return new ReactLink(
