@@ -1,4 +1,4 @@
-ReactLink-Immutable
+ReactLink-Immutable [![Version][npm-image]][npm-url]
 ===================
 
 A [React](https://facebook.github.io/react/) mixin that provides two-way data binding for components using [ImmutableJS](https://facebook.github.io/immutable-js/) data structures as properties of `this.state`.
@@ -48,3 +48,7 @@ var WithImmutableLink = React.createClass({
 
 - Author: [David Idol](http://daveidol.com)
 - License: [MIT](http://opensource.org/licenses/MIT)
+
+
+[npm-image]: https://img.shields.io/npm/v/reactlink-immutable.svg?style=flat-square
+[npm-url]: https://www.npmjs.org/package/reactlink-immutable
