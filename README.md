@@ -3,7 +3,7 @@ ReactLink-Immutable [![Version][npm-image]][npm-url]
 
 A [React](https://facebook.github.io/react/) mixin that provides two-way data binding for components using [ImmutableJS](https://facebook.github.io/immutable-js/) data structures as properties of `this.state`.
 
-## Huh?
+## Huh? ReactLink?
 
 Ok, let's back up a little bit. React provides a method, known as [ReactLink](https://facebook.github.io/react/docs/two-way-binding-helpers.html), to update `this.state` on a component whenever the value of an `<input>` field changes. This method is exposed by the convenient mixin `React.addons.LinkedStateMixin`, which essentially just binds the `onChange` event handler to the `this.setState()` function of the `<input>` field.
 
@@ -48,7 +48,9 @@ var WithImmutableLink = React.createClass({
 
 For convenience, a single string parameter is still supported for the key (rather than an array), which will make it behave like the standard `this.linkState` method.
 
-By default any non-primative values (such as arrays) you link to will be converted to their plain JS equivalent via the Immutable `toJS()` function. However, there is an optional second parameter to `linkImmutableState`, which will disable this behavior if specified. Ex: `this.linkImmutableState(['myImmutable', 'myList'], true)` will keep the `myList` value as an `Immutable.List` instead of converting it to an `Array`.
+By default, any non-primative values (such as `Immutable.List` or `Immutable.Map` objects) you link to will be converted to their plain JS equivalent (ex: `Array` or `Object`) via the Immutable `toJS()` function. However, there is an optional second parameter to `linkImmutableState`, which will disable this behavior if specified.
+
+Ex: `this.linkImmutableState(['myImmutable', 'myList'], true)` will keep the `myList` value as an `Immutable.List` instead of converting it to an `Array`.
 
 ## Credits
 
