@@ -5,7 +5,7 @@ A [React](https://facebook.github.io/react/) mixin that provides two-way data bi
 
 ## Huh? ReactLink?
 
-Ok, let's back up a little bit. React provides a method, known as [ReactLink](https://facebook.github.io/react/docs/two-way-binding-helpers.html), to update `this.state` on a component whenever the value of an `<input>` field changes. This method is exposed by the convenient mixin `React.addons.LinkedStateMixin`, which essentially just binds the `onChange` event handler to the `this.setState()` function of the `<input>` field.
+Ok, let's back up a little bit. React provides a method, known as [ReactLink](https://facebook.github.io/react/docs/two-way-binding-helpers.html), to update `this.state` on a component whenever the value of an `<input>` field changes. This method is exposed by the convenient mixin `React.addons.LinkedStateMixin`, which essentially just binds the `onChange` event handler of the `<input>` field to the `this.setState()` function.
 
 This is great, especially when creating a component with multiple input fields, but it starts to fall apart if you want to use deeply-nested objects inside `this.state` of your component.
 
