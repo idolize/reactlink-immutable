@@ -6,9 +6,9 @@ var expect = chai.expect;
 
 var linkImmutableState = require('../LinkedImmutableStateMixin').linkImmutableState;
 
-function linkAndRun(linkFunc, key, newValue, disableToJS) {
+function linkAndRun(linkFunc, key, newValue, opts) {
   // Sets up the two-way binding and then issues a change
-  var result = linkFunc(key, disableToJS);
+  var result = linkFunc(key, opts);
   result.requestChange(newValue);
   return result;
 }
@@ -110,10 +110,22 @@ describe('linkImmutableState', function() {
     test.state.a = new Immutable.Map({ b: new Immutable.Map({ c: origC }) });
     var origB = test.state.a.get('b');
     var newList = new Immutable.List(['correct']);
-    var res = linkAndRun(link, ['a', 'b', 'c'], newList, true);
+    var res = linkAndRun(link, ['a', 'b', 'c'], newList, { immutableValue: true });
     expect(res.value).to.be.instanceof(Immutable.List);
     expect(res.value).to.equal(origC);
     expect(test.state.a.get('b')).to.not.equal(origB);
     expect(test.state.a.getIn(['b', 'c'])).to.equal(newList);
+  });
+
+  it('should allow turning off fromJS', function() {
+    var origC = ['one', 'two'];
+    test.state.a = new Immutable.Map({ b: new Immutable.Map({ c: origC }) });
+    var origB = test.state.a.get('b');
+    var newList = ['correct'];
+    var res = linkAndRun(link, ['a', 'b', 'c'], newList, { mutableState: true });
+    expect(res.value).to.be.instanceof(Array);
+    expect(res.value).to.deep.equal(origC);
+    expect(test.state.a.get('b')).to.not.equal(origB);
+    expect(test.state.a.getIn(['b', 'c'])).to.deep.equal(newList);
   });
 });
