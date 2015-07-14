@@ -48,7 +48,7 @@ var WithImmutableLink = React.createClass({
 
 For convenience, a single string parameter is still supported for the key (rather than an array), which will make it behave like the standard `this.linkState` method.
 
-## Non-primatives
+### Non-primatives
 
 By default any non-primative Immutable values (such as `Immutable.List` or `Immutable.Map`) you link to will be converted to their plain JS equivalent via the Immutable `toJS()` function before passing them as `value`. However, there is an option for `linkImmutableState` that will disable this behavior if specified.
 

@@ -1,6 +1,6 @@
 {
   "name": "reactlink-immutable",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Two-way binding Mixin for React with support for Immutable.js data structures",
   "author": {
     "name": "David Idol",
