@@ -3,9 +3,9 @@ ReactLink-Immutable [![Version][npm-image]][npm-url]
 
 A [React](https://facebook.github.io/react/) mixin that provides two-way data binding for components using [ImmutableJS](https://facebook.github.io/immutable-js/) data structures as properties of `this.state`.
 
-## Huh?
+## Huh? ReactLink?
 
-Ok, let's back up a little bit. React provides a method, known as [ReactLink](https://facebook.github.io/react/docs/two-way-binding-helpers.html), to update `this.state` on a component whenever the value of an `<input>` field changes. This method is exposed by the convenient mixin `React.addons.LinkedStateMixin`, which essentially just binds the `onChange` event handler to the `this.setState()` function of the `<input>` field.
+Ok, let's back up a little bit. React provides a method, known as [ReactLink](https://facebook.github.io/react/docs/two-way-binding-helpers.html), to update `this.state` on a component whenever the value of an `<input>` field changes. This method is exposed by the convenient mixin `React.addons.LinkedStateMixin`, which essentially just binds the `onChange` event handler of the `<input>` field to the `this.setState()` function.
 
 This is great, especially when creating a component with multiple input fields, but it starts to fall apart if you want to use deeply-nested objects inside `this.state` of your component.
 
@@ -50,11 +50,11 @@ For convenience, a single string parameter is still supported for the key (rathe
 
 ## Non-primatives
 
-By default any non-primative Immutable values (such as `List` or `Map`) you link to will be converted to their plain JS equivalent via the Immutable `toJS()` function before passing them as `value`. However, there is an option for `linkImmutableState` that will disable this behavior if specified.
+By default any non-primative Immutable values (such as `Immutable.List` or `Immutable.Map`) you link to will be converted to their plain JS equivalent via the Immutable `toJS()` function before passing them as `value`. However, there is an option for `linkImmutableState` that will disable this behavior if specified.
 
 Ex: `this.linkImmutableState(['myImmutable', 'myList'], { immutableValue: true })` will keep the `myList` value as an `Immutable.List` in the view instead of converting it to an `Array`.
 
-Also, by default any non-primative, non-Immutable values (such as `Array` or `Object`) you from your view state to will be converted to their Immutable equivalent via the Immutable `fromJS()` function before passing them back to your `state`. However, there is an option for `linkImmutableState` that will disable this behavior if specified.
+Also, by default any non-primative, non-Immutable values (such as `Array` or `Object`) you link from your view state to will be converted to their Immutable equivalent via the Immutable `fromJS()` function before passing them back to your `state`. However, there is an option for `linkImmutableState` that will disable this behavior if specified.
 
 Ex: `this.linkImmutableState(['myImmutable', 'myArray'], { mutableState: true })` will keep the `myArray` value as an `Array` in the state instead of converting it to an `Immutable.List`.
 
