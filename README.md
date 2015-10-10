@@ -48,13 +48,13 @@ var WithImmutableLink = React.createClass({
 
 For convenience, a single string parameter is still supported for the key (rather than an array), which will make it behave like the standard `this.linkState` method.
 
-### Non-primatives
+### Non-primitives
 
-By default any non-primative Immutable values (such as `Immutable.List` or `Immutable.Map`) you link to will be converted to their plain JS equivalent via the Immutable `toJS()` function before passing them as `value`. However, there is an option for `linkImmutableState` that will disable this behavior if specified.
+By default any non-primitive Immutable values (such as `Immutable.List` or `Immutable.Map`) you link to will be converted to their plain JS equivalent via the Immutable `toJS()` function before passing them as `value`. However, there is an option for `linkImmutableState` that will disable this behavior if specified.
 
 Ex: `this.linkImmutableState(['myImmutable', 'myList'], { immutableValue: true })` will keep the `myList` value as an `Immutable.List` in the view instead of converting it to an `Array`.
 
-Also, by default any non-primative, non-Immutable values (such as `Array` or `Object`) you link from your view state to will be converted to their Immutable equivalent via the Immutable `fromJS()` function before passing them back to your `state`. However, there is an option for `linkImmutableState` that will disable this behavior if specified.
+Also, by default any non-primitive, non-Immutable values (such as `Array` or `Object`) you link from your view state to will be converted to their Immutable equivalent via the Immutable `fromJS()` function before passing them back to your `state`. However, there is an option for `linkImmutableState` that will disable this behavior if specified.
 
 Ex: `this.linkImmutableState(['myImmutable', 'myArray'], { mutableState: true })` will keep the `myArray` value as an `Array` in the state instead of converting it to an `Immutable.List`.
 
